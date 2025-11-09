@@ -28,6 +28,9 @@ def init_pool():
 
 def get_db_connection():
     """Get a database connection from the pool"""
+    global connection_pool
+    if connection_pool is None:
+        init_pool()
     return connection_pool.getconn()
 
 def return_db_connection(conn):
