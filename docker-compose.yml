@@ -27,7 +27,6 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - NODE_ENV=development
       - DB_HOST=postgres
       - DB_PORT=5432
       - DB_NAME=equipment_lending
@@ -41,7 +40,6 @@ services:
         condition: service_healthy
     volumes:
       - ./backend:/app
-      - /app/node_modules
     networks:
       - equipment_network
 
