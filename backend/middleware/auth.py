@@ -1,16 +1,13 @@
 from functools import wraps
 from flask import request, jsonify
-from flask_jwt_extended import verify_jwt_in_request, get_jwt_identity
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from config.database import query_db
 
 def token_required(f):
     """Decorator to require JWT token"""
     @wraps(f)
+    @jwt_required()
     def decorated(*args, **kwargs):
-        try:
-            verify_jwt_in_request()
-        except Exception as e:
-            return jsonify({'error': 'Invalid or missing token'}), 401
         return f(*args, **kwargs)
     return decorated
 

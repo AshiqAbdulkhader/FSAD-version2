@@ -70,8 +70,8 @@ def login():
         if not bcrypt.checkpw(password.encode('utf-8'), user[2].encode('utf-8')):
             return jsonify({'error': 'Invalid credentials'}), 401
         
-        # Create JWT token
-        access_token = create_access_token(identity=user[0])
+        # Create JWT token (identity must be a string)
+        access_token = create_access_token(identity=str(user[0]))
         
         return jsonify({
             'token': access_token,
