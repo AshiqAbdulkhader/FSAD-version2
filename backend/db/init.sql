@@ -49,12 +49,8 @@ CREATE INDEX IF NOT EXISTS idx_equipment_category ON equipment(category);
 CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
 CREATE INDEX IF NOT EXISTS idx_users_role ON users(role);
 
--- Insert sample admin user (password: admin123 - should be hashed in production)
--- Note: This is just for initial setup, password should be hashed using bcrypt
--- Password hash for 'admin123' using bcrypt with salt rounds 10
-INSERT INTO users (email, password, name, role) 
-VALUES ('admin@school.edu', '$2b$10$rOzJqZqZqZqZqZqZqZqZqOqZqZqZqZqZqZqZqZqZqZqZqZqZqZq', 'Admin User', 'admin')
-ON CONFLICT (email) DO NOTHING;
+-- Note: Admin user should be created through the registration endpoint
+-- Password will be properly hashed using bcrypt in the application
 
 -- Insert sample equipment
 INSERT INTO equipment (name, category, condition, quantity, description) VALUES
